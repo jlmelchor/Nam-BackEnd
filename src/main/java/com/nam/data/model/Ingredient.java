@@ -1,9 +1,9 @@
-package com.nam.model;
+package com.nam.data.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "INGREDIENTS")
+@Table(name = "INGREDIENT")
 public class Ingredient {
 
     @Id
@@ -23,15 +23,11 @@ public class Ingredient {
     @Column(name = "GLUTEN_FREE", nullable = false)
     private String glutenFree;
 
-    public Ingredient() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FAMILY_ID", referencedColumnName = "FAMILY_ID")
+    private Family family;
 
-    public Ingredient(long ingredientId, String name, String vegan, String vegetarian, String glutenFree) {
-        this.ingredientId = ingredientId;
-        this.name = name;
-        this.vegan = vegan;
-        this.vegetarian = vegetarian;
-        this.glutenFree = glutenFree;
+    public Ingredient() {
     }
 
     public long getIngredientId() {
@@ -72,5 +68,13 @@ public class Ingredient {
 
     public void setGlutenFree(String glutenFree) {
         this.glutenFree = glutenFree;
+    }
+
+    public Family getFamily() {
+        return family;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
     }
 }

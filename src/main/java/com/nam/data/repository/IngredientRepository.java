@@ -1,6 +1,6 @@
-package com.nam.repository;
+package com.nam.data.repository;
 
-import com.nam.model.Ingredient;
+import com.nam.data.model.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

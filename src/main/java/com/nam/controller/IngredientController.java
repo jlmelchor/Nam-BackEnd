@@ -1,6 +1,6 @@
 package com.nam.controller;
 
-import com.nam.model.Ingredient;
+import com.nam.data.model.Ingredient;
 import com.nam.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
