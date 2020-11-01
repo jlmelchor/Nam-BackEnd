@@ -34,4 +34,13 @@ public class RecipeController {
         List<Recipe> recipes = recipeService.getRecipes(userId);
         return recipes;
     }
+
+    // Devuelve el resultado del filtrado de recetas a partir de una lista de ingredientes
+    @RequestMapping(value = "/recipesFiltered", method = RequestMethod.POST)
+    public List<Recipe> filterRecipes(
+            @RequestParam("foodList") List<String> ingredients
+    ) {
+        List<Recipe> recipes = recipeService.getRecipesFiltered(ingredients);
+        return recipes;
+    }
 }

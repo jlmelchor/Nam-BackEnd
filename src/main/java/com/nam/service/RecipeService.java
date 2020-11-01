@@ -11,4 +11,6 @@ public interface RecipeService {
     Recipe addRecipe(String name, String surName, String email, String password);
 
     List<Recipe> getRecipes(Long userId);
+
+    List<Recipe> getRecipesFiltered(List<String> ingredients);
 }

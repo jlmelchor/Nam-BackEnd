@@ -40,10 +40,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> getRecipes(Long userId) {
         List<Recipe> recipes = recipeRepository.findAll();
-        List<Long> ingredientsId = new ArrayList<>();
         // Recetas favoritas del usuario
         List<RecipeFav> recipeFavs = recipeFavService.getRecipeFavs(userId);
         for (Recipe recipe : recipes) {
+            List<Long> ingredientsId = new ArrayList<>();
             // Ingredientes de cada receta
             List<RecipeIngredient> recipeIngredients = recipeIngredientService.getByRecipe(recipe.getRecipeId());
             for (RecipeIngredient recipeIngredient : recipeIngredients) {
@@ -65,5 +65,31 @@ public class RecipeServiceImpl implements RecipeService {
             }
         }
         return recipes;
+    }
+
+    @Override
+    public List<Recipe> getRecipesFiltered(List<String> userIngredientList) {
+        List<Recipe> recipes = recipeRepository.findAll();
+        List<Recipe> recipesResult = new ArrayList<>();
+        for (Recipe recipe : recipes) {
+            List<Long> ingredientsId = new ArrayList<>();
+            List<String> ingredientsList = new ArrayList<>();
+            // Ingredientes de cada receta
+            List<RecipeIngredient> recipeIngredients = recipeIngredientService.getByRecipe(recipe.getRecipeId());
+            for (RecipeIngredient recipeIngredient : recipeIngredients) {
+                ingredientsId.add(recipeIngredient.getIngredient().getIngredientId());
+            }
+            List<Ingredient> ingredients = ingredientService.getIngredientsByIds(ingredientsId);
+            if (ingredients != null) {
+                recipe.setIngredients(ingredients);
+                for (Ingredient ing : ingredients) {
+                    ingredientsList.add(ing.getName());
+                }
+                if (ingredientsList.containsAll(userIngredientList)) {
+                    recipesResult.add(recipe);
+                }
+            }
+        }
+        return recipesResult;
     }
 }

@@ -1,7 +1,7 @@
 package com.nam.controller;
 
-import com.nam.data.model.Ingredient;
-import com.nam.service.IngredientService;
+import com.nam.data.model.Family;
+import com.nam.service.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +12,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
-public class IngredientController {
+public class FamilyController {
 
     @Autowired
-    IngredientService ingredientService;
+    FamilyService familyService;
 
-    @RequestMapping(value = "/ingredients", method = RequestMethod.GET)
-    public List<Ingredient> getIngredients(){
-        return ingredientService.getAllIngredients();
+    @RequestMapping(value = "/families", method = RequestMethod.GET)
+    public List<Family> getIngredients(){
+        return familyService.getAllFamilies();
     }
 }
