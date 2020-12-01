@@ -14,15 +14,16 @@ public class RecipeController {
     @Autowired
     RecipeService recipeService;
 
-    // Añade una receta
+    // Añade una receta para un usuario
     @RequestMapping(value = "/recipe", method = RequestMethod.POST)
     public Recipe addRecipe(
             @RequestParam("name") String name,
-            @RequestParam("surname") String surname,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password
+            @RequestParam("ingredients") List<String> ingredients,
+            @RequestParam("description") String description,
+            @RequestParam("category") Long categoryId,
+            @RequestParam("userId") Long userId
             ) {
-        Recipe recipe = recipeService.addRecipe(name, surname, email, password);
+        Recipe recipe = recipeService.addRecipe(name, ingredients, description, categoryId, userId);
         return recipe;
     }
 

@@ -5,6 +5,7 @@ import com.nam.data.model.Recipe;
 import com.nam.data.model.RecipeFav;
 import com.nam.data.model.RecipeIngredient;
 import com.nam.data.repository.RecipeRepository;
+import javafx.scene.chart.CategoryAxisBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class RecipeServiceImpl implements RecipeService {
     IngredientService ingredientService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     RecipeFavService recipeFavService;
 
     @Override
@@ -32,8 +36,25 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe addRecipe(String name, String surName, String email, String password) {
+    public Recipe addRecipe(String name, List<String> ingredients, String description, Long categoryId, Long userId) {
         Recipe recipe = new Recipe();
+        List<Ingredient> ingredientList = new ArrayList<>();
+        if (ingredients != null) {
+            List<Ingredient> allIngredients = ingredientService.getAllIngredients();
+            for (String ingredientName : ingredients) {
+                for (Ingredient ingredient : allIngredients) {
+                    if (ingredient.getName().equals(ingredientName)) {
+                        ingredientList.add(ingredient);
+                    }
+                }
+            }
+        }
+        recipe.setName(name);
+        recipe.setIngredients(ingredientList);
+        recipe.setDescription(description);
+        recipe.setCategory(categoryService.getCategoryById(categoryId));
+        recipe.setUserId(userId);
+        recipeRepository.save(recipe);
         return recipe;
     }
 

@@ -22,6 +22,9 @@ public class Recipe {
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     private Category category;
 
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private Long userId;
+
     @Transient
     private List<Ingredient> ingredients;
 
@@ -29,12 +32,6 @@ public class Recipe {
     private String isFav;
 
     public Recipe() {
-    }
-
-    public Recipe(long recipeId, String name, String description) {
-        this.recipeId = recipeId;
-        this.name = name;
-        this.description = description;
     }
 
     public long getRecipeId() {
@@ -83,5 +80,13 @@ public class Recipe {
 
     public void setIsFav(String isFav) {
         this.isFav = isFav;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -9,4 +9,5 @@ public interface IngredientService {
     List<Ingredient> getAllIngredients();
 
     List<Ingredient> getIngredientsByIds(List<Long> ingredients);
+
 }

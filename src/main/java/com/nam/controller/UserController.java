@@ -12,6 +12,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    // Devuelve un usuario
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public NamUser getUser(
+            @PathVariable("id") Long userId
+    ) {
+        NamUser user = userService.getUser(userId);
+        return user;
+    }
+
     // Añade un usuario
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public NamUser addUser(

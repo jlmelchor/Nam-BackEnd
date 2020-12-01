@@ -2,8 +2,6 @@ package com.nam.service;
 
 import com.nam.data.model.NamUser;
 
-import java.util.Optional;
-
 public interface UserService {
 
     NamUser getUser(Long userId);

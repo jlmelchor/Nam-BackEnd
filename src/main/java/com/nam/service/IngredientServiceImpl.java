@@ -20,4 +20,5 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public List<Ingredient> getIngredientsByIds(List<Long> ingredients) { return ingredientRepository.findAllById(ingredients); }
+
 }
