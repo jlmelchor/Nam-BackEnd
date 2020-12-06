@@ -1,9 +1,12 @@
 package com.nam.controller;
 
 import com.nam.data.model.Recipe;
+import com.nam.data.model.TFile;
+import com.nam.service.FileService;
 import com.nam.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ public class RecipeController {
     @Autowired
     RecipeService recipeService;
 
+    @Autowired
+    FileService fileService;
+
     // Añade una receta para un usuario
     @RequestMapping(value = "/recipe", method = RequestMethod.POST)
     public Recipe addRecipe(
@@ -21,9 +27,13 @@ public class RecipeController {
             @RequestParam("ingredients") List<String> ingredients,
             @RequestParam("description") String description,
             @RequestParam("category") Long categoryId,
-            @RequestParam("userId") Long userId
-            ) {
+            @RequestParam("userId") Long userId,
+            @RequestParam(value = "file", required = false) MultipartFile file
+    ) {
         Recipe recipe = recipeService.addRecipe(name, ingredients, description, categoryId, userId);
+        if (file != null) {
+            TFile tFile = fileService.addFile(file);
+        }
         return recipe;
     }
 

@@ -5,7 +5,6 @@ import com.nam.data.model.Recipe;
 import com.nam.data.model.RecipeFav;
 import com.nam.data.model.RecipeIngredient;
 import com.nam.data.repository.RecipeRepository;
-import javafx.scene.chart.CategoryAxisBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

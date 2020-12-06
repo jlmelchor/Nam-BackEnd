@@ -1,13 +1,9 @@
 package com.nam.controller;
 
 import com.nam.data.model.Recipe;
-import com.nam.data.model.RecipeFav;
 import com.nam.service.RecipeFavService;
-import com.nam.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
